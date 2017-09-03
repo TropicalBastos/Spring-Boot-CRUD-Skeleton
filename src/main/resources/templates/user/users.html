@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+  <p th:if="${updated} != null" th:text="${updated}"></p>
+  <p th:if="${added} != null" th:text="${added}"></p>
+  <p th:if="${deleted} != null" th:text="${deleted}"></p>
+  <p th:if="${updated} == null AND ${added} == null AND ${fromupdate} != null AND ${deleted} == null">Error adding/updating/deleting record</p>
+  <th:block th:each="user: ${users}">
+	  <form action="/user/edit" method="GET">
+	  	<h6 th:text="${user.getEmail()}"></h6>
+	  	<input type="hidden" name="id" th:value="${user.getId()}"/>
+	  	<button type="submit">Edit</button>
+	  </form>
+  </th:block>
+  <form action="/user/edit" method="GET">
+	  <button type="submit">Add New User</button>	
+  </form>
+  <form th:action="@{/logout}" method="POST">
+  	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+  	<button type="submit">Logout</button>
+  </form>
+  </body>
+</html>

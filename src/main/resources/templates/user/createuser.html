@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+	  <div th:if="${user} != null">
+		  <form action="/user/update" method="POST">
+		  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+		  	<input type="hidden" name="id" th:value="${user.getId()}"/>
+		  	<input type="text" name="name" th:value="${user.getName()}"/>
+		  	<input type="text" name="email" th:value="${user.getEmail()}"/>
+		  	<input type="text" th:value="${user.getPassword()}" name="password"/>
+		  	<button type="submit">Update</button>
+		  </form>
+		  <form action="/user/delete" method="POST">
+		  <input type="hidden" name="id" th:value="${user.getId()}"/>
+		  	<button>Delete User</button>
+		  </form>
+	  </div>
+	  <div th:if="${user} == null">
+		  <form action="/user/update" method="POST">
+		  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+		  	<input name="name" type="text"/>
+		  	<input name="email" type="text"/>
+		  	<input name="password" type="password"/>
+		  	<button type="submit">Add</button>
+		  </form>
+	  </div>
+	  <a type="button" href="/users">Back</a>
+  </body>
+</html>
